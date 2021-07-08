@@ -26,17 +26,17 @@ class MyCommand extends Command {
 Paremeter **ignoreBots**
 wether this command should ignore calls from other bots.
 _____________________________________________
-|		   |			    |
+|                  |                        |
 |  type: Boolean   |   default value: true  |
-|		   |			    |
+|                  |                        |
 _____________________________________________
 
 Paremeter **allowedWebhooks**
 what webhooks are allowed to use this command.
 ______________________________________________________
-|			   |			     |
+|                          |                         |
 |  type: Array or String   |	default value: []    |
-|			   |			     |
+|                          |                         |
 ______________________________________________________
 			  
 Array containing the IDs or names of the desired bots, or the string 'all' meaning all webhooks are allowed.
