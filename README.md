@@ -23,15 +23,15 @@ class MyCommand extends Command {
     }
 }
 ```
-Paremeter **ignoreBots**
+Paremeter **ignoreBots.**
 wether this command should ignore calls from other bots.
----------------------------------------------
+_____________________________________________
 |                  |                        |
 |  type: Boolean   |   default value: true  |
 |                  |                        |
----------------------------------------------
+_____________________________________________
 
-Paremeter **allowedWebhooks**
+Paremeter **allowedWebhooks.**
 what webhooks are allowed to use this command.
 ______________________________________________________
 |                          |                         |
