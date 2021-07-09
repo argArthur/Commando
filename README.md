@@ -23,15 +23,14 @@ class MyCommand extends Command {
     }
 }
 ```
-**Parameters**
+**Parameters**\
 Wether this command should ignore calls from other bots.
 
 | Name | Description | Type | Default Value |
+|------|-------------|------|---------------|
 | ignoreBots | Wether this command should ignore calls from other bots. | Boolean | true | 
-| allowedWebhooks | What webhooks are allowed to use this command. | Array<String id or name> or 'all' | [] |
+| allowedWebhooks | What webhooks are allowed to use this command. | Array \<String id or name\> or 'all' | [] |
 
-			  
-Array containing the IDs or names of the desired bots, or the string 'all' meaning all webhooks are allowed.
 
 ## Installation
 **Node 12.0.0 or newer is required.**  
