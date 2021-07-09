@@ -23,8 +23,7 @@ class MyCommand extends Command {
     }
 }
 ```
-**Parameters**\
-Wether this command should ignore calls from other bots.
+**Parameters**
 
 | Name | Description | Type | Default Value |
 |------|-------------|------|---------------|
