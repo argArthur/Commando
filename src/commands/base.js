@@ -525,7 +525,8 @@ class Command {
 		if(typeof info.description !== 'string') throw new TypeError('Command description must be a string.');
 		if('format' in info && typeof info.format !== 'string') throw new TypeError('Command format must be a string.');
 		if('details' in info && typeof info.details !== 'string') throw new TypeError('Command details must be a string.');
-		if('ignoreBots' in info && typeof info.ignoreBots !== 'boolean') throw new TypeError('Command ignoreBots must be a boolean.');
+		if('allowBots' in info && typeof info.allowBots !== 'boolean') throw new TypeError('Command ignoreBots must be a boolean.');
+		if('allowedWebhooks' in info && !Array.isArray(info.allowedWebhooks) || typeof info.allowedWebhooks !== 'string') throw new TypeError('Command allowedWebhooks must be an Array or String');
 		if(info.examples && (!Array.isArray(info.examples) || info.examples.some(ex => typeof ex !== 'string'))) {
 			throw new TypeError('Command examples must be an Array of strings.');
 		}
