@@ -230,7 +230,7 @@ class Command {
 		 * Whether bot should ignore commands from other bots
 		 * @type {Boolean}
 		 */
-		this.ignoreBots = info.ignoreBots || true;
+		this.allowBots = info.allowBots || false;
 		
 		/**
 		 * Whether the command is enabled globally
