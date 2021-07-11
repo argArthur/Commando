@@ -16,7 +16,7 @@ In this fork you can include options when creating a command to accept commands 
 class MyCommand extends Command {
     constructor(client) {
         super(client, {
-            ignoreBots: false,
+            allowBots: true,
 	    allowedWebhooks: [<my webhook id>, <my webhook name>] // or
 	    allowedWebhooks: 'all'
         });
