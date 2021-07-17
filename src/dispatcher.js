@@ -121,7 +121,7 @@ class CommandDispatcher {
 			cmdMsg = this.parseMessage(message);
 		}
 
-		if(message.author.bot && !message.author.webhookID && !message.command.allowBots) return;
+		if(message.author.bot && !message.webhookID && !message.command.allowBots) return;
 
 		// Run the command, or reply with an error
 		let responses;
