@@ -232,6 +232,12 @@ class Command {
 		 */
 		this.allowBots = info.allowBots || false;
 		
+        /**
+         * what webhokos should be allowed to use this command
+         * @type {Array<string>, string} 
+         */
+        this.allowedWebhooks = info.allowedWebhooks || [];
+
 		/**
 		 * Whether the command is enabled globally
 		 * @type {boolean}
@@ -259,6 +265,13 @@ class Command {
 
 		if(this.ownerOnly && (ownerOverride || !this.client.isOwner(message.author))) {
 			return `The \`${this.name}\` command can only be used by the bot owner.`;
+		}
+
+		
+		if (message.webhookID) {
+			return this.allowedWebhooks === 'all' 
+			|| this.allowedWebhooks.includes(message.webhookID)
+			|| this.allowedWebhooks.includes(message.author.name)
 		}
 
 		if(message.channel.type === 'text' && this.userPermissions) {
@@ -526,9 +539,21 @@ class Command {
 		if('format' in info && typeof info.format !== 'string') throw new TypeError('Command format must be a string.');
 		if('details' in info && typeof info.details !== 'string') throw new TypeError('Command details must be a string.');
 		if('allowBots' in info && typeof info.allowBots !== 'boolean') throw new TypeError('Command ignoreBots must be a boolean.');
-		if('allowedWebhooks' in info && !Array.isArray(info.allowedWebhooks) || typeof info.allowedWebhooks !== 'string') throw new TypeError('Command allowedWebhooks must be an Array or String');
-		if(info.examples && (!Array.isArray(info.examples) || info.examples.some(ex => typeof ex !== 'string'))) {
+		if('allowedWebhooks' in info && !Array.isArray(info.allowedWebhooks) && typeof info.allowedWebhooks !== 'string') throw new TypeError('Command allowedWebhooks must be an Array or String');
+        if(info.examples && (!Array.isArray(info.examples) || info.examples.some(ex => typeof ex !== 'string'))) {
 			throw new TypeError('Command examples must be an Array of strings.');
+		}
+		if(info.allowedWebhooks) {
+			if(!Array.isArray(info.allowedWebhooks) && info.allowedWebhooks !== 'all') {
+				throw new TypeError('Command allowedWebhooks must be an Array of ID strings or \'all\'');
+			}
+			for(const whID of info.allowedWebhooks) {
+				if (typeof whID !== 'string') throw new RangeError(`Invalid webhook in allowedWebhooks: ${whID}. All items must be strings`)
+                // const wh = await client.user.fetch(whID)
+				// if(!message.guild.fetchWebhooks
+                    // .then(r => {return r.includes(wh)})
+                    // .catch((e) => { throw new RangeError(`Invalid webhook in allowedWebhooks ${whID}`} )))
+                }
 		}
 		if(info.clientPermissions) {
 			if(!Array.isArray(info.clientPermissions)) {
