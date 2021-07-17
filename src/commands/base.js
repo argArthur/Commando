@@ -232,11 +232,11 @@ class Command {
 		 */
 		this.allowBots = info.allowBots || false;
 		
-        /**
-         * what webhokos should be allowed to use this command
-         * @type {Array<string>, string} 
-         */
-        this.allowedWebhooks = info.allowedWebhooks || [];
+		/**
+		 * what webhokos should be allowed to use this command
+		 * @type {Array<string>, string} 
+		 */
+		this.allowedWebhooks = info.allowedWebhooks || [];
 
 		/**
 		 * Whether the command is enabled globally
