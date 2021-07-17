@@ -538,23 +538,12 @@ class Command {
 		if(typeof info.description !== 'string') throw new TypeError('Command description must be a string.');
 		if('format' in info && typeof info.format !== 'string') throw new TypeError('Command format must be a string.');
 		if('details' in info && typeof info.details !== 'string') throw new TypeError('Command details must be a string.');
-		if('allowBots' in info && typeof info.allowBots !== 'boolean') throw new TypeError('Command ignoreBots must be a boolean.');
-		if('allowedWebhooks' in info && !Array.isArray(info.allowedWebhooks) && typeof info.allowedWebhooks !== 'string') throw new TypeError('Command allowedWebhooks must be an Array or String');
-        if(info.examples && (!Array.isArray(info.examples) || info.examples.some(ex => typeof ex !== 'string'))) {
+		if(info.examples && (!Array.isArray(info.examples) || info.examples.some(ex => typeof ex !== 'string'))) {
 			throw new TypeError('Command examples must be an Array of strings.');
 		}
-		if(info.allowedWebhooks) {
-			if(!Array.isArray(info.allowedWebhooks) && info.allowedWebhooks !== 'all') {
-				throw new TypeError('Command allowedWebhooks must be an Array of ID strings or \'all\'');
-			}
-			for(const whID of info.allowedWebhooks) {
-				if (typeof whID !== 'string') throw new RangeError(`Invalid webhook in allowedWebhooks: ${whID}. All items must be strings`)
-                // const wh = await client.user.fetch(whID)
-				// if(!message.guild.fetchWebhooks
-                    // .then(r => {return r.includes(wh)})
-                    // .catch((e) => { throw new RangeError(`Invalid webhook in allowedWebhooks ${whID}`} )))
-                }
-		}
+		if('allowBots' in info && typeof info.allowBots !== 'boolean') throw new TypeError('Command ignoreBots must be a boolean.');
+		if('allowedWebhooks' in info && Array.isArray(info.allowedWebhooks) && info.allowedWebhooks.some(ex => typeof ex !== 'string') 
+		   && info.allowedWebhooks !== 'string') throw new TypeError('Command allowedWebhooks must be an Array of strings or \'all\'');
 		if(info.clientPermissions) {
 			if(!Array.isArray(info.clientPermissions)) {
 				throw new TypeError('Command clientPermissions must be an Array of permission key strings.');
