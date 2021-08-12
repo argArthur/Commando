@@ -121,11 +121,12 @@ class CommandDispatcher {
 			cmdMsg = this.parseMessage(message);
 		}
 
-		if(message.author.bot && !message.webhookID && !message.command.allowBots) return;
-
+		
 		// Run the command, or reply with an error
 		let responses;
 		if(cmdMsg) {
+			if(message.author.bot && !message.webhookID && !message.command.allowBots) return;
+			
 			const inhibited = this.inhibit(cmdMsg);
 
 			if(!inhibited) {
