@@ -106,7 +106,7 @@ class CommandDispatcher {
 	async handleMessage(message, oldMessage) {
 		/* eslint-disable max-depth */
 		if(!this.shouldHandleMessage(message, oldMessage)) return;
-
+		
 		// Parse the message, and get the old result if it exists
 		let cmdMsg, oldCmdMsg;
 		if(oldMessage) {
@@ -121,9 +121,12 @@ class CommandDispatcher {
 			cmdMsg = this.parseMessage(message);
 		}
 
+		
 		// Run the command, or reply with an error
 		let responses;
 		if(cmdMsg) {
+			if(message.author.bot && !message.webhookID && !message.command.allowBots) return;
+			
 			const inhibited = this.inhibit(cmdMsg);
 
 			if(!inhibited) {
@@ -174,8 +177,7 @@ class CommandDispatcher {
 		// Ignore partial messages
 		if(message.partial) return false;
 
-		if(message.author.bot && this.ignoreBots) return false;
-		else if(message.author.id === this.client.user.id) return false;
+		if(message.author.id === this.client.user.id) return false;
 
 		// Ignore messages from users that the bot is already waiting for input from
 		if(this._awaiting.has(message.author.id + message.channel.id)) return false;
